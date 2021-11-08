@@ -35,6 +35,10 @@ public class AdminController {
     @PostMapping("/addNewProduct")
     public String addNewProduct(Model model, @ModelAttribute("product") Product saveProduct) {
 
+        if (saveProduct == null){
+            return "redirect:/product_form";
+        }
+
         if (productService.save(saveProduct)){
             model.addAttribute ("message", "Товар добавлен в базу данных");
             model.addAttribute ("product", new Product ());
@@ -42,7 +46,6 @@ public class AdminController {
         } else {
             model.addAttribute ("error", "Ошибка при сохранении товара");
             model.addAttribute ("product", saveProduct);
-
         }
 
         model.addAttribute ("categories", productService.getAllCategories ());

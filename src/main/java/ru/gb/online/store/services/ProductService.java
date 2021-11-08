@@ -51,7 +51,8 @@ public class ProductService {
 
     public boolean save (Product product) {
 
-        if (productRepository.findOneByTitle (product.getTitle ()) != null){
+        if (product == null ||
+                productRepository.findOneByTitle (product.getTitle ()) != null){
             return false;
         }
 
